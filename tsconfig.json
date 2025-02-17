@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    // COMPILACIÓN DEL CÓDIGO
+    "target": "ES2020",                 // Salida en un estándar moderno de JavaScript
+    "module": "CommonJS",               // Sistema de módulos usado por Node.js
+    "lib": ["ES2020"],                  // Características modernas del lenguaje (sin incluir DOM)
+
+    // DIRECTORIOS
+    "rootDir": "./src",                 // Carpeta fuente de TypeScript
+    "outDir": "./dist",                 // Carpeta destino de JavaScript compilado
+
+    // VERIFICACIONES ESTRICTAS
+    "strict": true,                     // Activa todas las verificaciones estrictas
+    "noImplicitAny": true,              // Previene el uso implícito del tipo `any`
+    "strictNullChecks": true,           // Manejo estricto de null/undefined
+    "strictBindCallApply": true,        // Verifica la correcta aplicación de funciones
+
+    // INTEROPERABILIDAD
+    "esModuleInterop": true,            // Facilita la importación de módulos CommonJS
+    "allowSyntheticDefaultImports": true, // Permite importar default aunque el módulo no lo exporte
+
+    // OPTIMIZACIÓN DE LA COMPILACIÓN
+    "skipLibCheck": true,               // No verifica tipos en bibliotecas externas
+    "forceConsistentCasingInFileNames": true, // Consistencia en nombres de archivos
+
+    // SOURCE MAPS Y DEBUGGING
+    "sourceMap": true,                  // Genera mapas para depuración en TypeScript
+    "inlineSources": true,              // Incluye el código fuente original en los mapas
+
+    // OTRAS CONFIGURACIONES
+    "moduleResolution": "node",         // Resolve módulos al estilo Node.js
+    "resolveJsonModule": true,          // Permite importar archivos JSON
+    "allowJs": false,                   // No permite usar archivos JavaScript en la compilación
+    "declaration": true,                // Genera archivos .d.ts para definiciones de tipos
+    "removeComments": true,             // Elimina comentarios del código compilado
+    "isolatedModules": true             // Compatible con herramientas como Babel o SWC
+  },
+  "include": ["src/**/*"],              // Incluye todo el código en la carpeta src
+  "exclude": ["node_modules", "dist", "test"], // Excluye dependencias, compilados y tests
+  "ts-node": {                          // Configuración adicional para ts-node
+    "require": ["dotenv/config"]        // Carga variables de entorno automáticamente
+  }
+}
