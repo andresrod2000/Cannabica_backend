@@ -24,7 +24,7 @@ Ejecución en modo desarrollo
 Para correr la aplicación en modo desarrollo, utiliza el siguiente comando:
 npm run dev
 
-Uso
+4. Uso
 Una vez que el servidor esté corriendo, puedes abrir tu navegador y acceder a la siguiente URL para ver los datos dummy del usuario:
 
 http://localhost:3000/api/user/
