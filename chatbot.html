@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot con Gemini</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        #chatbox {
+            width: 100%;
+            max-width: 400px;
+            height: 400px;
+            overflow-y: auto;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            margin: auto;
+            text-align: left;
+        }
+        .message {
+            padding: 8px;
+            border-radius: 5px;
+            margin: 5px 0;
+            max-width: 80%;
+        }
+        .user {
+            background-color: #007bff;
+            color: white;
+            text-align: right;
+            margin-left: auto;
+        }
+        .bot {
+            background-color: #ddd;
+            color: black;
+            text-align: left;
+        }
+        #messageInput {
+            width: 80%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Chatbot con Gemini</h2>
+    <div id="chatbox"></div>
+
+    <input type="text" id="messageInput" placeholder="Escribe tu mensaje...">
+    <button onclick="sendMessage()">Enviar</button>
+
+    <script>
+        async function sendMessage() {
+            const input = document.getElementById("messageInput");
+            const chatbox = document.getElementById("chatbox");
+            const userMessage = input.value.trim();
+
+            if (userMessage === "") return;
+
+            // Agregar mensaje del usuario al chat
+            chatbox.innerHTML += `<div class="message user">${userMessage}</div>`;
+            input.value = "";
+            chatbox.scrollTop = chatbox.scrollHeight;
+
+            try {
+                // Enviar mensaje al backend
+                const response = await fetch("http://localhost:3000/api/chatbot", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ message: userMessage })
+                });
+
+                const data = await response.json();
+
+                // Agregar respuesta del bot al chat
+                chatbox.innerHTML += `<div class="message bot">${data.response}</div>`;
+                chatbox.scrollTop = chatbox.scrollHeight;
+            } catch (error) {
+                console.error("Error enviando mensaje:", error);
+                chatbox.innerHTML += `<div class="message bot">Error al conectar con el chatbot.</div>`;
+            }
+        }
+    </script>
+
+</body>
+</html>
