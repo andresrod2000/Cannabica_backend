@@ -9,7 +9,13 @@ dotenv.config();
 
 const app: Application = express();
 
-app.use(cors());
+app.use(cors({
+  origin: "*",  // 🔹 Permite cualquier origen
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
+}));
+
 app.use(express.json());
 
 // Definir rutas
