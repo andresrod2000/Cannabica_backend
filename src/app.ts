@@ -1,21 +1,25 @@
-import express, { Application } from 'express';
-import cors from 'cors';
-import userRouter from './routers/userRoute';
-import chatbotRoute from "./routers/chatbotRoute";
+import express, { Application } from "express";
+import cors from "cors";
 import dotenv from "dotenv";
-
+import userRouter from "./routers/userRoute";
+import chatbotRoute from "./routers/chatbotRoute";
+import authRoutes from "./routers/authRoutes"; // Corregido: importación de rutas de autenticación
+import userRoutes from "./routers/userRoutes"; // Corregido: importación de rutas de usuario
 dotenv.config();
 
-const app: Application = express(); // ✅ Declara `app` solo una vez
+const app: Application = express();
 
 app.use(cors());
 app.use(express.json());
 
-// Rutas
-app.use('/api', userRouter);
+// Definir rutas
+app.use("/api", userRouter);
 console.log("✅ Ruta de usuario cargada en /api");
 
 app.use("/api/chatbot", chatbotRoute);
-console.log("✅ Ruta del chatbot cargada en /chatbot");
+console.log("✅ Ruta del chatbot cargada en /api/chatbot");
 
-export default app; // ✅ Asegúrate de exportarlo correctamente
+app.use("/api/auth", authRoutes); // <-- Corregido: Se agrega la ruta de autenticación correctamente
+console.log("✅ Rutas de autenticación cargadas en /api/auth");
+app.use("/api/user", userRoutes); 
+export default app;

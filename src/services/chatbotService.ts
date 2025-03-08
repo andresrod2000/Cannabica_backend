@@ -7,7 +7,7 @@ export const chatbotService = async (message: string): Promise<string> => {
     if (!message) return "Por favor, envía un mensaje válido.";
 
     try {
-        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
 
         // Agregar mensaje al historial
         conversationHistory.push(`Usuario: ${message}`);
