@@ -1,0 +1,33 @@
+name: Deploy TypeScript to EC2
+
+on:
+  push:
+    branches:
+      - develop  # El flujo se activa solo para la rama 'develop'
+
+jobs:
+  deploy:
+    runs-on: [self-hosted, linux, x64]  # Ejecutar en tu self-hosted runner
+
+    steps:
+      # Paso 1: Checkout del código
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Paso 2: Instalar dependencias
+      - name: Install dependencies
+        run: |
+          cd /home/ec2-user/Cannabica_backend  # Ajusta la ruta de tu proyecto
+          npm install  # O el comando adecuado si usas otro gestor de dependencias
+
+      # Paso 3: Compilar el código TypeScript
+      - name: Compile TypeScript
+        run: |
+          cd /home/ec2-user/Cannabica_backend  # Ajusta la ruta de tu proyecto
+          tsc  # Ejecuta el compilador de TypeScript
+
+      # Paso 4: Ejecutar la aplicación con npm run start
+      - name: Run application
+        run: |
+          cd /home/ec2-user/Cannabica_backend  # Ajusta la ruta de tu proyecto
+          npm run start  # Usar el script de inicio definido en package.json
