@@ -4,7 +4,10 @@ import app from "./app"; // Importa la configuración de Express
 
 dotenv.config();
 
+
+
 const PORT = Number(process.env.PORT) || 3000;
+
 
 
 // Conectar a MongoDB
@@ -16,6 +19,7 @@ mongoose
 console.log("✅ Iniciando servidor...");
 
 // Iniciar servidor
+
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Servidor corriendo en http://0.0.0.0:${PORT}`);
 });

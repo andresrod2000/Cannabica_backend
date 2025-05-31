@@ -1,5 +1,8 @@
-import express, { Application } from "express";
-import cors from "cors";
+import express, { Application } from 'express';
+import cors from 'cors';
+//import chatbotRoute from "./routers/chatbotRoute";
+import mapPointRoute from "./routers/mapPointRoute";
+
 import dotenv from "dotenv";
 import chatbotRoute from "./routers/chatbotRoute";
 import authRoutes from "./routers/authRoutes"; // Corregido: importación de rutas de autenticación
@@ -14,8 +17,13 @@ app.use(cors());
 app.use(express.json());
 
 
-app.use("/api/chatbot", chatbotRoute);
-console.log("✅ Ruta del chatbot cargada en /api/chatbot");
+
+//app.use("/api/chatbot", chatbotRoute);
+//console.log("✅ Ruta del chatbot cargada en /chatbot");
+
+app.use("/api/map", mapPointRoute);
+console.log("✅ Ruta del mapa cargada en /map");
+
 
 app.use("/api/auth", authRoutes); // <-- Corregido: Se agrega la ruta de autenticación correctamente
 console.log("✅ Rutas de autenticación cargadas en /api/auth");
