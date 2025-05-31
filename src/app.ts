@@ -1,7 +1,6 @@
 import express, { Application } from 'express';
 import cors from 'cors';
 //import chatbotRoute from "./routers/chatbotRoute";
-import mapPointRoute from "./routers/mapPointRoute";
 
 import dotenv from "dotenv";
 import chatbotRoute from "./routers/chatbotRoute";
